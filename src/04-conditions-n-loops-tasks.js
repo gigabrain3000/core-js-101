@@ -80,8 +80,12 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  const arr = [a, b, c].sort((i, k) => i - k);
+  if (arr[0] + arr[1] > arr[2]) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -152,8 +156,11 @@ function doRectanglesOverlap(rect1, rect2) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  if ((point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2 < circle.radius ** 2) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -276,8 +283,21 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const str = String(ccn);
+  const arr = [];
+  for (let i = 0; i < str.length; i += 1) {
+    if (!(i % 2)) {
+      if (str[i] * 2 > 9) {
+        arr.push(str[i] * 2 - 9);
+      } else {
+        arr.push(+str[i]);
+      }
+    } else {
+      arr.push(+str[i]);
+    }
+  }
+  return !(arr.reduce((acc, item) => acc + item) % 10);
 }
 
 /**
